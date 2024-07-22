@@ -210,7 +210,7 @@
         });
 
         function buscarPelicula(nombrePelicula, año, director, guardarBusquedaFlag) {
-            const apiKey = '1bc64afd'; // Tu clave de API de OMDB
+            const apiKey = '1bc64afd';
             let url = `https://www.omdbapi.com/?apikey=${apiKey}&type=movie`;
 
             if (nombrePelicula) url += `&s=${encodeURIComponent(nombrePelicula)}`;
