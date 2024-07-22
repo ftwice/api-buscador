@@ -188,7 +188,7 @@
 
     <script>
         document.getElementById('pelicula-formulario').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
+            event.preventDefault();
 
             const nombrePelicula = document.getElementById('nombre-pelicula').value;
             const año = document.getElementById('año').value;
@@ -200,7 +200,7 @@
                 return;
             }
 
-            // Validación: No se permite la búsqueda solo por director
+            // Validación: No se permite la búsqueda solo por director por la limitación de la API
             if (!nombrePelicula && director) {
                 document.getElementById('respuesta').innerText = 'No se permite la búsqueda solo por Director.';
                 return;
@@ -259,7 +259,6 @@
                                         </div>`;
                                 });
 
-                                // Guardar la búsqueda en el almacenamiento local si el flag está activo
                                 if (guardarBusquedaFlag) {
                                     guardarBusqueda(nombrePelicula, año, director);
                                     mostrarBusquedasPrevias();
