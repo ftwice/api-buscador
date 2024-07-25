@@ -5,126 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Información de Película</title>
     <style>
+        /* Variables CSS */
+        :root {
+            --primary-color: #28a745;
+            --secondary-color: #2c2c2c;
+            --hover-color: #d9534f;
+            --hover-secondary-color: #c9302c;
+            --font-color: #fff;
+            --background-color: #1b1b1b;
+            --container-width: 800px;
+            --input-width: calc(100% - 20px);
+            --input-max-width: 760px;
+            --input-padding: 10px;
+            --input-font-size: 1em;
+            --element-margin: 15px;
+            --label-margin: 5px;
+            --button-margin-top: 30px; /* Nuevo margen superior para el botón */
+        }
+
         /* Estilos generales para el cuerpo del documento */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1b1b1b;
-            color: #fff;
+            background-color: var(--background-color);
+            color: var(--font-color);
         }
 
         /* Contenedor principal */
         .container {
             padding: 20px;
-            max-width: 1200px;
+            max-width: var(--container-width);
             margin: 0 auto;
-        }
-
-        /* Estilo para el título principal */
-        h1 {
-            text-align: center;
-            color: #fff;
-            font-size: 1.5em;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
 
         /* Estilo para el formulario */
         form {
-            background: #2c2c2c;
+            background: var(--secondary-color);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
-            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            animation: fadeIn 1s ease-in-out;
         }
 
         /* Estilo para las etiquetas de los campos del formulario */
         label {
-            margin: 10px 0 5px;
-            color: #fff;
+            margin: var(--label-margin) 0;
+            color: #ccc;
             width: 100%;
+            font-size: 1.1em;
         }
 
         /* Estilo para los campos de entrada de texto y el botón de envío */
         .input-field {
-            width: calc(100% - 20px);
-            max-width: 760px;
-            padding: 10px;
+            width: var(--input-width);
+            max-width: var(--input-max-width);
+            padding: var(--input-padding);
             border-radius: 5px;
             border: 1px solid #444;
             background-color: #333;
-            color: #fff;
+            color: var(--font-color);
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-            margin-bottom: 10px;
+            margin: var(--label-margin) 0 var(--element-margin) 0;
+            font-size: var(--input-font-size);
+            animation: colorChange 2s infinite alternate;
         }
 
         /* Estilo específico para el botón de envío */
         .input-field.button {
-            background: #28a745;
+            background: var(--primary-color);
             border: none;
             cursor: pointer;
             transition: background 0.3s, transform 0.3s;
-            margin-top: 20px;
+            margin-top: var(--button-margin-top); /* Espacio adicional */
+            align-self: center; /* Centrado */
+            font-size: var(--input-font-size);
+            padding: var(--input-padding);
         }
 
         /* Estilo para el botón de envío al pasar el cursor */
         .input-field.button:hover {
-            background: #218838;
-            transform: scale(1.05);
+            background: var(--hover-color);
+            transform: scale(1.1);
         }
 
         /* Estilo para el contenedor de la respuesta */
         .response {
-            background: #2c2c2c;
+            background: var(--secondary-color);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 100%;
             margin: 20px auto;
         }
 
         /* Estilo para los párrafos dentro del contenedor de la respuesta */
         .response p {
             margin: 10px 0;
+            font-size: 1.1em;
         }
 
         /* Estilo para las imágenes dentro del contenedor de la respuesta */
         .response img {
             max-width: 100%;
             border-radius: 10px;
+            margin-top: 10px;
         }
 
         /* Estilo para el texto adicional en la parte superior */
         .info {
-            font-size: 0.8em;
+            font-size: 0.9em;
             margin-bottom: 20px;
-            background: #2c2c2c;
+            background: var(--secondary-color);
             padding: 10px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
+            width: 100%;
             margin: 0 auto;
             color: #ccc;
         }
 
         /* Estilo para la lista de búsquedas previas */
         .search-history {
-            background: #2c2c2c;
+            background: var(--secondary-color);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 100%;
             margin: 20px auto;
             color: #ccc;
         }
 
         .search-history h2 {
             margin-top: 0;
+            font-size: 1.5em;
         }
 
         .search-history ul {
@@ -133,21 +153,31 @@
         }
 
         .search-history li {
-            padding: 5px 0;
+            padding: 10px 0;
             border-bottom: 1px solid #444;
             cursor: pointer;
+            transition: color 0.3s;
         }
 
         .search-history li:hover {
             text-decoration: underline;
+            color: var(--hover-secondary-color);
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes colorChange {
+            from { background-color: #333; }
+            to { background-color: #555; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        
-        <h1>Formulario para hacer consultas a la base de datos de OMDb</h1>
-        
         <!-- Formulario para ingresar el nombre de la película -->
         <form id="pelicula-formulario">
             <label for="nombre-pelicula">Película:</label>
@@ -172,138 +202,6 @@
         </div>
     </div>
 
-    <script>
-        document.getElementById('pelicula-formulario').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const nombrePelicula = document.getElementById('nombre-pelicula').value;
-            const año = document.getElementById('año').value;
-            const director = document.getElementById('director').value;
-
-            // Validación: No se permite la búsqueda solo por año
-            if (!nombrePelicula && !director) {
-                document.getElementById('respuesta').innerText = 'Por favor ingrese al menos una película o un director. Nota: La búsqueda por director no es admitida por la API.';
-                return;
-            }
-
-            // Validación: No se permite la búsqueda solo por director por la limitación de la API
-            if (!nombrePelicula && director) {
-                document.getElementById('respuesta').innerText = 'No se permite la búsqueda solo por Director.';
-                return;
-            }
-
-            buscarPelicula(nombrePelicula, año, director, true);
-        });
-
-        function buscarPelicula(nombrePelicula, año, director, guardarBusquedaFlag) {
-            const apiKey = '1bc64afd';
-            let url = `https://www.omdbapi.com/?apikey=${apiKey}&type=movie`;
-
-            if (nombrePelicula) url += `&s=${encodeURIComponent(nombrePelicula)}`;
-            if (año) url += `&y=${encodeURIComponent(año)}`;
-
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    const respuestaDiv = document.getElementById('respuesta');
-                    respuestaDiv.innerHTML = '';
-
-                    if (data.Response === "True") {
-                        const promesas = data.Search.map(pelicula => {
-                            const detalleUrl = `https://www.omdbapi.com/?i=${pelicula.imdbID}&apikey=${apiKey}`;
-                            return fetch(detalleUrl).then(res => res.json());
-                        });
-
-                        Promise.all(promesas).then(peliculasDetalladas => {
-                            const peliculasFiltradas = peliculasDetalladas.filter(pelicula => {
-                                return (!director || pelicula.Director.toLowerCase().includes(director.toLowerCase())) &&
-                                       (!nombrePelicula || pelicula.Title.toLowerCase().includes(nombrePelicula.toLowerCase()));
-                            });
-
-                            if (peliculasFiltradas.length > 0) {
-                                peliculasFiltradas.forEach(pelicula => {
-                                    let detalles = '';
-
-                                    if (pelicula.Director && pelicula.Director !== "N/A") detalles += `<p><strong>Director:</strong> ${pelicula.Director}</p>`;
-                                    if (pelicula.Writer && pelicula.Writer !== "N/A") detalles += `<p><strong>Escritores:</strong> ${pelicula.Writer}</p>`;
-                                    if (pelicula.Actors && pelicula.Actors !== "N/A") detalles += `<p><strong>Actores:</strong> ${pelicula.Actors}</p>`;
-                                    if (pelicula.Genre && pelicula.Genre !== "N/A") detalles += `<p><strong>Género:</strong> ${pelicula.Genre}</p>`;
-                                    if (pelicula.Language && pelicula.Language !== "N/A") detalles += `<p><strong>Idioma:</strong> ${pelicula.Language}</p>`;
-                                    if (pelicula.Country && pelicula.Country !== "N/A") detalles += `<p><strong>País:</strong> ${pelicula.Country}</p>`;
-                                    if (pelicula.Awards && pelicula.Awards !== "N/A") detalles += `<p><strong>Premios:</strong> ${pelicula.Awards}</p>`;
-                                    if (pelicula.Plot && pelicula.Plot !== "N/A") detalles += `<p><strong>Trama:</strong> ${pelicula.Plot}</p>`;
-                                    if (pelicula.Rated && pelicula.Rated !== "N/A") detalles += `<p><strong>Clasificación:</strong> ${pelicula.Rated}</p>`;
-                                    if (pelicula.Runtime && pelicula.Runtime !== "N/A") detalles += `<p><strong>Duración:</strong> ${pelicula.Runtime}</p>`;
-
-                                    let poster = pelicula.Poster !== "N/A" ? `<img src="${pelicula.Poster}" alt="Poster de ${pelicula.Title}">` : '';
-
-                                    respuestaDiv.innerHTML += 
-                                        `<div>
-                                            <h3>${pelicula.Title} (${pelicula.Year})</h3>
-                                            ${detalles}
-                                            ${poster}
-                                        </div>`;
-                                });
-
-                                if (guardarBusquedaFlag) {
-                                    guardarBusqueda(nombrePelicula, año, director);
-                                    mostrarBusquedasPrevias();
-                                }
-                            } else {
-                                respuestaDiv.innerText = 'No se encontraron películas para los criterios especificados.';
-                            }
-                        });
-                    } else {
-                        respuestaDiv.innerText = 'Película no encontrada.';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('respuesta').innerText = 'Hubo un error al obtener la información de la película.';
-                });
-        }
-
-        // Función para guardar una búsqueda en el almacenamiento local
-        function guardarBusqueda(nombrePelicula, año, director) {
-            let busquedas = JSON.parse(localStorage.getItem('busquedas')) || [];
-            const busqueda = { nombrePelicula, año, director };
-            const busquedaTexto = construirTextoBusqueda(busqueda);
-            if (!busquedas.some(b => construirTextoBusqueda(b) === busquedaTexto)) {
-                busquedas.push(busqueda);
-                localStorage.setItem('busquedas', JSON.stringify(busquedas));
-            }
-        }
-
-        // Función para construir el texto de búsqueda
-        function construirTextoBusqueda({ nombrePelicula, año, director }) {
-            let textoBusqueda = nombrePelicula;
-            if (año) {
-                textoBusqueda += `, ${año}`;
-            }
-            if (director) {
-                textoBusqueda += `, ${director}`;
-            }
-            return textoBusqueda;
-        }
-
-        // Función para mostrar las búsquedas previas
-        function mostrarBusquedasPrevias() {
-            const listaBusquedas = document.getElementById('lista-busquedas');
-            listaBusquedas.innerHTML = '';
-            let busquedas = JSON.parse(localStorage.getItem('busquedas')) || [];
-
-            busquedas.forEach((busqueda, index) => {
-                let item = document.createElement('li');
-                item.textContent = construirTextoBusqueda(busqueda);
-                item.addEventListener('click', () => {
-                    buscarPelicula(busqueda.nombrePelicula, busqueda.año, busqueda.director, false);
-                });
-                listaBusquedas.appendChild(item);
-            });
-        }
-
-        // Mostrar las búsquedas previas al cargar la página
-        document.addEventListener('DOMContentLoaded', mostrarBusquedasPrevias);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
