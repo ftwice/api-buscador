@@ -67,21 +67,20 @@
 
         /* Estilo específico para el botón de envío */
         .input-field.button {
-            background: #d8f0d8;
+            background: #444;
             border: none;
             cursor: pointer;
-            transition: background 0.3s, color 0.3s, transform 0.3s;
+            transition: background 0.3s, transform 0.3s;
             margin-top: 30px; /* Espacio adicional */
             align-self: center; /* Centrado */
             font-size: 1em;
             padding: 10px;
-            color: #333;
+            color: #fff;
         }
 
         /* Estilo para el botón de envío al pasar el cursor */
         .input-field.button:hover {
-            background: #f8c8c8;
-            color: #000;
+            background: #666;
             transform: scale(1.05);
         }
 
@@ -161,6 +160,69 @@
         @keyframes colorChange {
             from { background-color: #333; }
             to { background-color: #555; }
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+                gap: 10px;
+            }
+
+            form {
+                padding: 15px;
+            }
+
+            .input-field {
+                width: calc(100% - 10px);
+                font-size: 0.9em;
+            }
+
+            .input-field.button {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+
+            .response, .search-history {
+                padding: 15px;
+            }
+
+            .info {
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+                gap: 5px;
+            }
+
+            form {
+                padding: 10px;
+            }
+
+            .input-field {
+                width: 100%;
+                font-size: 0.8em;
+            }
+
+            .input-field.button {
+                padding: 6px;
+                font-size: 0.8em;
+            }
+
+            .response, .search-history {
+                padding: 10px;
+            }
+
+            .info {
+                padding: 5px;
+            }
+
+            label {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
