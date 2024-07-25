@@ -5,19 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Información de Película</title>
     <style>
+        /* Variables CSS */
+        :root {
+            --primary-color: #28a745;
+            --secondary-color: #2c2c2c;
+            --hover-color: #444; /* Cambiado a gris */
+            --font-color: #fff;
+            --background-color: #1b1b1b;
+            --container-width: 800px;
+            --input-width: calc(100% - 20px);
+            --input-max-width: 760px;
+            --input-padding: 10px;
+            --input-font-size: 1em;
+            --element-margin: 15px;
+            --label-margin: 5px;
+            --button-margin-top: 30px; /* Nuevo margen superior para el botón */
+        }
+
         /* Estilos generales para el cuerpo del documento */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1b1b1b;
-            color: #fff;
+            background-color: var(--background-color);
+            color: var(--font-color);
         }
 
         /* Contenedor principal */
         .container {
             padding: 20px;
-            max-width: 800px;
+            max-width: var(--container-width);
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr;
@@ -26,7 +43,7 @@
 
         /* Estilo para el formulario */
         form {
-            background: #2c2c2c;
+            background: var(--secondary-color);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -39,7 +56,7 @@
 
         /* Estilo para las etiquetas de los campos del formulario */
         label {
-            margin: 5px 0;
+            margin: var(--label-margin) 0;
             color: #ccc;
             width: 100%;
             font-size: 1.1em;
@@ -47,46 +64,40 @@
 
         /* Estilo para los campos de entrada de texto y el botón de envío */
         .input-field {
-            width: calc(100% - 20px);
-            max-width: 760px;
-            padding: 10px;
+            width: var(--input-width);
+            max-width: var(--input-max-width);
+            padding: var(--input-padding);
             border-radius: 5px;
             border: 1px solid #444;
             background-color: #333;
-            color: #fff;
+            color: var(--font-color);
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-            margin: 5px 0 15px 0;
-            font-size: 1em;
-            transition: filter 0.3s ease;
-        }
-
-        /* Efecto hover para los campos de entrada de texto */
-        .input-field:hover {
-            filter: hue-rotate(-45deg);
+            margin: var(--label-margin) 0 var(--element-margin) 0;
+            font-size: var(--input-font-size);
+            animation: colorChange 2s infinite alternate;
         }
 
         /* Estilo específico para el botón de envío */
         .input-field.button {
-            background: #444;
+            background: var(--primary-color);
             border: none;
             cursor: pointer;
             transition: background 0.3s, transform 0.3s;
-            margin-top: 30px; /* Espacio adicional */
+            margin-top: var(--button-margin-top); /* Espacio adicional */
             align-self: center; /* Centrado */
-            font-size: 1em;
-            padding: 10px;
-            color: #fff;
+            font-size: var(--input-font-size);
+            padding: var(--input-padding);
         }
 
         /* Estilo para el botón de envío al pasar el cursor */
         .input-field.button:hover {
-            background: #666;
-            transform: scale(1.05);
+            background: var(--hover-color); /* Cambia el color de fondo a gris */
+            transform: scale(0.9); /* Reduce el tamaño */
         }
 
         /* Estilo para el contenedor de la respuesta */
         .response {
-            background: #2c2c2c;
+            background: var(--secondary-color);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -111,7 +122,7 @@
         .info {
             font-size: 0.9em;
             margin-bottom: 20px;
-            background: #2c2c2c;
+            background: var(--secondary-color);
             padding: 10px;
             border-radius: 5px;
             width: 100%;
@@ -121,7 +132,7 @@
 
         /* Estilo para la lista de búsquedas previas */
         .search-history {
-            background: #2c2c2c;
+            background: var(--secondary-color);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -144,11 +155,13 @@
             padding: 10px 0;
             border-bottom: 1px solid #444;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: color 0.3s;
+            font-size: 1.2em; /* Ajusta el tamaño de la fuente */
         }
 
         .search-history li:hover {
-            transform: scale(1.025);
+            text-decoration: underline;
+            color: #ccc; /* Cambia el color de texto a gris en hover */
         }
 
         /* Animaciones */
